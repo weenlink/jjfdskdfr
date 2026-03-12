@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSocial — социальная сеть для криптомира</title>
+    <!-- Google Fonts и Font Awesome для иконок -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Навбар */
+        .navbar {
+            padding: 20px 0;
+            border-bottom: 1px solid #1f1f2e;
+            background-color: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #b0b0c0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #a855f7;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: transparent;
+            border: 1px solid #a855f7;
+            color: #a855f7;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #a855f7, #3b82f6);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* Hero секция */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: radial-gradient(circle at 70% 30%, #1a1a2e, #0a0a0f);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff, #c0c0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #a0a0b0;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .hero-buttons .btn {
+            padding: 14px 36px;
+            font-size: 16px;
+        }
+
+        /* Секция возможностей */
+        .features {
+            padding: 100px 0;
+            background-color: #0f0f17;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            font-size: 18px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #1a1a24;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #2a2a35;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #a855f7;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #a855f7;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .feature-card p {
+            color: #a0a0b0;
+        }
+
+        /* Пример поста (имитация ленты) */
+        .post-preview {
+            padding: 80px 0;
+            background-color: #0a0a0f;
+        }
+
+        .post-card {
+            background: #1a1a24;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #2a2a35;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .user-info h4 {
+            font-size: 18px;
+            color: white;
+        }
+
+        .user-info span {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .post-content {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #2a2a35;
+            padding-top: 20px;
+        }
+
+        .post-stats i {
+            margin-right: 8px;
+            color: #a855f7;
+        }
+
+        /* Секция "Для кого" */
+        .audience {
+            padding: 100px 0;
+            background-color: #0f0f17;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .audience-item {
+            padding: 30px;
+            background: #1a1a24;
+            border-radius: 20px;
+            border: 1px solid #2a2a35;
+        }
+
+        .audience-item i {
+            font-size: 40px;
+            color: #3b82f6;
+            margin-bottom: 16px;
+        }
+
+        .audience-item h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .audience-item p {
+            color: #a0a0b0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid #1f1f2e;
+            text-align: center;
+            color: #7f8c8d;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: #b0b0c0;
+            font-size: 20px;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: #a855f7;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .nav-links {
+                display: none; /* Для простоты скрываем на мобильных */
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">CryptoSocial</div>
+            <div class="nav-links">
+                <a href="#">Возможности</a>
+                <a href="#">Сообщество</a>
+                <a href="#">Блог</a>
+                <button class="btn">Войти</button>
+                <button class="btn btn-primary">Подключить кошелёк</button>
+            </div>
+            <!-- На мобильных можно добавить гамбургер, но для простоты оставим так -->
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Социальная сеть для криптомира</h1>
+            <p>Общайтесь, делитесь новостями и аналитикой с биржами, блогерами и проектами. Интеграция с кошельками, токен-гейтинг и крипто-дотации.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Начать читать</button>
+                <button class="btn">Подключить кошелёк</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Возможности -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Возможности платформы</h2>
+            <p class="section-subtitle">Всё, что нужно для крипто-комьюнити: от привычных постов до блокчейн-интеграций</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-coins"></i></div>
+                    <h3>Крипто-дотации</h3>
+                    <p>Поддерживайте авторов токенами прямо из поста. Интеграция с MetaMask и WalletConnect.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Токен-гейтинг</h3>
+                    <p>Создавайте контент, доступный только держателям ваших токенов или NFT.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Графики цен</h3>
+                    <p>Встраивайте интерактивные графики TradingView прямо в посты.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>Верификация</h3>
+                    <p>Официальные значки для бирж и проектов на основе подтверждения владения.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-image"></i></div>
+                    <h3>Галерея NFT</h3>
+                    <p>Отображайте свою коллекцию NFT в профиле.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>DeFi-интеграция</h3>
+                    <p>Показывайте свои позиции, ставки и доходность в реальном времени.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Пример поста (имитация ленты) -->
+    <section class="post-preview">
+        <div class="container">
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="avatar">C</div>
+                    <div class="user-info">
+                        <h4>CryptoWhale <span style="color: #3b82f6;">●</span></h4>
+                        <span>@cryptowhale · 1 час назад</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Только что зашёл в новый пул ликвидности на Uniswap. APY просто космос! 🚀 Кто тоже там? 
+                    <span style="color: #a855f7; display: block; margin-top: 12px;">#DeFi #Uniswap</span>
+                </div>
+                <div style="background: #2a2a35; height: 200px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: #7f8c8d;">
+                    <i class="fas fa-chart-bar" style="font-size: 48px;"></i>  [График цены ETH/USDC]
+                </div>
+                <div class="post-stats">
+                    <span><i class="fas fa-heart"></i> 1.2K</span>
+                    <span><i class="fas fa-comment"></i> 89</span>
+                    <span><i class="fas fa-retweet"></i> 45</span>
+                    <span><i class="fas fa-coins"></i> 0.5 ETH</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Для кого -->
+    <section class="audience">
+        <div class="container">
+            <h2 class="section-title">Для кого эта сеть</h2>
+            <p class="section-subtitle">Присоединяйтесь к сообществу лидеров криптоиндустрии</p>
+            <div class="audience-grid">
+                <div class="audience-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Криптобиржи</h3>
+                    <p>Официальные анонсы, листинги, общение с трейдерами</p>
+                </div>
+                <div class="audience-item">
+                    <i class="fas fa-blog"></i>
+                    <h3>Криптоблогеры</h3>
+                    <p>Аналитика, обзоры, эксклюзивный контент</p>
+                </div>
+                <div class="audience-item">
+                    <i class="fas fa-code"></i>
+                    <h3>Криптопроекты</h3>
+                    <p>Продвижение, коллаборации, токен-гейтинг</p>
+                </div>
+                <div class="audience-item">
+                    <i class="fas fa-star"></i>
+                    <h3>Инфлюенсеры</h3>
+                    <p>Личный бренд, донаты от сообщества</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© 2026 CryptoSocial. Built for the future of Web3.</p>
+            <p style="margin-top: 16px; font-size: 14px;">* Это демо-версия концепции. Для полноценной работы требуется серверная часть.</p>
+        </div>
+    </footer>
+</body>
+</html>
